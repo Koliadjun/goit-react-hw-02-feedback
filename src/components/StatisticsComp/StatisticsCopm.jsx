@@ -13,6 +13,7 @@ export class StatisticsComp extends Component {
       bad: 0,
     },
   };
+
   static propTypes = {
     stats: PropTypes.shape({
       good: PropTypes.number.isRequired,
@@ -20,20 +21,21 @@ export class StatisticsComp extends Component {
       bad: PropTypes.number.isRequired,
     }),
   };
+
   state = {
     ...this.props.stats,
   };
+
   clickHandler = e =>
     this.setState(prevState => ({
       [e.target.textContent]: prevState[e.target.textContent] + 1,
     }));
-  countTotalFeedback = () => {
-    const value = Object.values(this.state);
-    return value.reduce((acc = 0, curValue) => (acc += curValue));
-  };
-  countPositiveFeedbackPercentage = () => {
-    return Math.round((this.state.good / this.countTotalFeedback()) * 100);
-  };
+
+  countTotalFeedback = () =>
+    Object.values(this.state).reduce((acc = 0, curValue) => (acc += curValue));
+
+  countPositiveFeedbackPercentage = () =>
+    Math.round((this.state.good / this.countTotalFeedback()) * 100);
 
   render() {
     const totalFeedback = this.countTotalFeedback();
