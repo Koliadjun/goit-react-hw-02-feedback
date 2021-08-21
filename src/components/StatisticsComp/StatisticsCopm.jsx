@@ -41,25 +41,25 @@ export class StatisticsComp extends Component {
     const totalFeedback = this.countTotalFeedback();
     const totalFeedbackPrs = this.countPositiveFeedbackPercentage();
     return (
-      <div>
+      <>
         <Section title={'Please live a comment'}>
           <FeedbackOptions
             options={Object.keys(this.state)}
             onLeaveFeedback={this.clickHandler}
           />
         </Section>
-        {totalFeedback ? (
-          <Section title="Statistics">
+        <Section title="Statistics">
+          {totalFeedback ? (
             <Statistics
               options={this.state}
               total={totalFeedback}
               positivePercentage={totalFeedbackPrs}
             />
-          </Section>
-        ) : (
-          <Notification message="No feedback given" />
-        )}
-      </div>
+          ) : (
+            <Notification message="No feedback given" />
+          )}
+        </Section>
+      </>
     );
   }
 }
