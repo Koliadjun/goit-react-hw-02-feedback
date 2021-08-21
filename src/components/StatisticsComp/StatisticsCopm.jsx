@@ -1,9 +1,10 @@
-import shortid from 'shortid';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Statistics from './Statistics/Statistics';
-
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Section from './Section/Section';
+import Notification from './Notification/Notification';
 export class StatisticsComp extends Component {
   static defaultProps = {
     stats: {
@@ -37,23 +38,25 @@ export class StatisticsComp extends Component {
   render() {
     const totalFeedback = this.countTotalFeedback();
     const totalFeedbackPrs = this.countPositiveFeedbackPercentage();
-    const options = Object.keys(this.state);
     return (
       <div>
-        <h2>Please live a comment</h2>
-        <ul>
-          {options.map(item => (
-            <li key={shortid.generate()}>
-              <button onClick={this.clickHandler}>{item}</button>
-            </li>
-          ))}
-        </ul>
-        <h2>Statistic</h2>
-        <Statistics
-          options={this.state}
-          total={totalFeedback}
-          positivePercentage={totalFeedbackPrs}
-        />
+        <Section title={'Please live a comment'}>
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.clickHandler}
+          />
+        </Section>
+        {totalFeedback ? (
+          <Section title="Statistics">
+            <Statistics
+              options={this.state}
+              total={totalFeedback}
+              positivePercentage={totalFeedbackPrs}
+            />
+          </Section>
+        ) : (
+          <Notification message="No feedback given" />
+        )}
       </div>
     );
   }
