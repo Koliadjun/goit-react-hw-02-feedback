@@ -2,22 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 
+import s from './Statistics.module.css';
 function Statistics({ options, total, positivePercentage }) {
   const ops = Object.keys(options);
   return (
-    <ul>
+    <ul className={s.list}>
       {ops.map(item => (
-        <li key={shortid.generate()}>
+        <li className={s.item} key={shortid.generate()}>
           {item}:<span> {options[item]}</span>
         </li>
       ))}
       {total ? (
-        <li>
+        <li className={s.item}>
           total: <span>{total}</span>
         </li>
       ) : null}
       {positivePercentage ? (
-        <li>
+        <li className={s.item}>
           positive feedback: <span>{positivePercentage}%</span>
         </li>
       ) : null}

@@ -1,0 +1,11 @@
+.list {
+}
+.item {
+  margin: 5px 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.item span {
+  margin-left: 5px;
+}
